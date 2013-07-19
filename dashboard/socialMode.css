@@ -1,0 +1,67 @@
+/* CSS declarations go here */
+
+body {
+}
+
+.socialOuterContainer {
+	width: 1820px;
+	height: 980px;
+	padding: 50px;
+	background: url("logo.png") no-repeat scroll 40px 5px transparent;
+}
+
+.socialUser {
+	float: left;
+	background: url('turn_orange_concentrics_btm.png') no-repeat -80px -120px;
+	background-color: rgb(248,252,252);
+	width: 620px;
+	height: 910px;
+	margin-right: 20px;
+
+	border: 1px solid rgb(176,216,234);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+.commonInterest {
+	float: left;
+	width: 500px;
+	height: 910px;
+	background: url('turn_lightbulb.png') no-repeat bottom center;
+	background-color: rgb(252,243,204);
+
+	border: 1px solid rgb(176,216,234);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+.socialUser .greeting {
+	text-align: center;
+	margin: 50px auto;
+	font-size: 50px;
+}
+
+.socialUser .msg, .commonInterest .msg {
+	font-size: 30px;
+	margin: 30px 10px;
+}
+
+.interest {
+	width: 306px;
+	height: 105px;
+	line-height: 105px;
+	background: url('tag_orange.png') no-repeat 0 0;
+	font-size: 30px;
+	color: #ffffff;
+	margin: 10px;
+}
+
+.interest.common {
+	background-image: url('turn_blue_tag.png');
+}
+
+.interest span {
+	margin-left: 10px;
+}

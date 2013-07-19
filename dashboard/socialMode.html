@@ -1,3 +1,29 @@
 <template name="socialMode">
-	test
+	<div class=socialOuterContainer>
+		{{#each socialUsers}}
+			{{> socialUser}}
+		{{/each}}
+	
+		<div class="commonInterest">
+			<div class="msg">We think you both might like:</div>
+			<div class="interest common"><span>{{commonInterest}}</span></div>
+			<div class="msg">Discuss...</div>
+		</div>
+	
+		<div class="clear"></div>
+	</div>
+</template>
+
+<template name="socialUser">
+	<div class="socialUser">
+		<div class="greeting">user {{id}}</div>
+		<div class="msg">We guess you might like:</div>
+		{{#each interests}}
+			{{#if isCommonInterestIs interest}}
+		<div class="interest common"><span>{{interest}}</span></div>
+			{{else}}
+		<div class="interest"><span>{{interest}}</span></div>
+			{{/if}}
+		{{/each}}
+	</div>
 </template>
