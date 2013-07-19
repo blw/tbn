@@ -1,15 +1,15 @@
-if (Meteor.isClient) {
+if (Meteor.isClient && document.location.pathname === "/closeUpMode") {
 
 	Template.closeUpMode.userId = function() {
-		return Session.get('userId');
+		return sessionStorage.getItem("userId");
 	};
 
 	Template.closeUpMode.creatives = function() {
-		return Session.get('creatives');
+		return JSON.parse(sessionStorage.getItem("creatives"));
 	};
 
 	Template.closeUpMode.tags = function() {
-		return Session.get('tags');
+		return JSON.parse(sessionStorage.getItem("tags"));
 	};
 
 	Meteor.setTimeout(function() {
