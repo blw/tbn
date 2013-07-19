@@ -31,19 +31,30 @@ if (Meteor.isClient && document.location.pathname === "/welcomeSocialMode") {
     Template.welcomeSocialMode.userId1 = function() {
       var userId1 = Session.get("userId1");
       var tags1 = Session.get("tags1");
-      sessionStorage.setItem("userId1", userId1);
-      sessionStorage.setItem("tags1", JSON.stringify(tags1));
+      if (userId1) {
+        sessionStorage.setItem("userId1", userId1);
+      }
+      if (tags1) {
+        sessionStorage.setItem("tags1", JSON.stringify(tags1));
+      }
+      
       console.log("session storage user Id 1: " + sessionStorage.getItem("userId1"));
-      return userId1;
+      return sessionStorage.getItem("userId1");
     }
 
     Template.welcomeSocialMode.userId2 = function() {
       var userId2 = Session.get("userId2");
       var tags2 = Session.get("tags2");
-      sessionStorage.setItem("userId2", userId2);
-      sessionStorage.setItem("tags2", JSON.stringify(tags2));
+      if (userId2) {
+        sessionStorage.setItem("userId2", userId2);
+      }
+      
+      if (tags2) {
+        sessionStorage.setItem("tags2", JSON.stringify(tags2));
+      }
+      
       console.log("session storage user Id 2: " + sessionStorage.getItem("userId2"));
-      return userId2;
+      return sessionStorage.getItem("userId2");
     }
     Meteor.setTimeout(function() {
       if (document.location.pathname !== "/socialMode") {
