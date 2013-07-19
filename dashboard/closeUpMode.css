@@ -1,0 +1,75 @@
+.creativesWrapper {
+	position: relative;
+	float: left;
+	padding: 30px;
+	border: #D65B24;
+	margin: 20px;
+	margin-right: 0px;
+	width: 0;
+	min-height: 910px;
+	background-color: #F2E0D8;
+	border-radius: 10px;
+}
+
+.creative {
+	float: left;
+	margin-right: 10px;
+	display: none;
+}
+
+.tags {
+	position: relative;
+	float: right;
+	font-size: 20px;
+	padding: 30px;
+	border: #B1D4E3;
+	margin: 20px;
+	width: 0;
+	min-height: 910px;
+	background-color: #EBF4F7;
+	background-image: url('turn_blue_concentrics_btm.png');
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	border-radius: 10px;
+}
+
+.tag {
+	display: none;
+	background-image: url('tag_orange.png');
+	background-repeat: no-repeat;
+	width: 306px;
+	height: 105px;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 105px;
+	font-size: 30px;
+	padding-left: 10px;
+	margin-top: 20px;
+}
+
+.advertiser {
+	background-color: #5C5C5C;
+	padding: 5px;
+	text-transform: uppercase;
+	color: #DEDEDE;
+	width: 150px;
+	margin-left: 8px;
+}
+
+.boxLabel {
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
+	text-transform: uppercase;
+	display: none;
+	font-size: 40px;
+}
+
+.creativesWrapper .boxLabel {
+	color: #D65B24;
+}
+
+.tags .boxLabel {
+	color: #7D8493;
+}

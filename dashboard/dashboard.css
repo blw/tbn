@@ -1,1 +1,89 @@
 /* CSS declarations go here */
+body {
+	overflow: hidden;
+}
+.welcomeScreen {
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+}
+
+.signal {
+	margin-top: 20px;
+}
+
+.idcard {
+	position: absolute;
+	left: 250px;
+	top: 300px;
+
+}
+
+.userInfo {
+	position: absolute;
+	width: 100%;
+	top: 50px;
+	left: 1200px;
+}
+
+.welcomeGreeting {
+	color: #d06d2a;
+	font-size: 100px;
+}
+
+.userId {
+	margin-top: 50px;
+	font-size: 50px;
+}
+
+.userId1 {
+	margin-top: 100px;
+	font-size: 50px;
+}
+
+.userId2 {
+	margin-top: 100px;
+	font-size: 50px;
+}
+
+.findAboutYouMessage {
+	margin-top: 250px;
+	font-size: 56px;
+}
+
+.idcardsocial1 {
+	float: left;
+	margin-right: 20px;
+	width: 700px;
+}
+
+.idcardsocial2 {
+	margin-left: 20px;
+	float:left;
+	width: 700px;
+}
+
+.userSocialInfo {
+	position: absolute;
+	width: 50%;
+	top: 150px;
+}
+
+.idsocial {
+	position:absolute;
+	top: 300px;
+	left: 120px;
+}
+
+.findAboutYouMessageSocial {
+		margin-top: 550px;
+		font-size: 56px;
+}
+
+.clear {
+	clear: both;
+}
+
+.none {
+	display: none;
+}

@@ -1,13 +1,11 @@
 <head>
-  <title>dashboard</title>
+  <title>TBN</title>
 </head>
 
 <body>
-  {{> hello}}
+  {{> body}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="body">
+  {{renderPage layoutName}}
 </template>
