@@ -14,7 +14,7 @@ body {
 	float: left;
 	background: url('turn_orange_concentrics_btm.png') no-repeat -80px -120px;
 	background-color: rgb(248,252,252);
-	width: 620px;
+	width: 600px;
 	height: 910px;
 	margin-right: 20px;
 
@@ -29,7 +29,7 @@ body {
 
 .commonInterest {
 	float: left;
-	width: 500px;
+	width: 353px;
 	height: 910px;
 	background: url('turn_lightbulb.png') no-repeat bottom center;
 	background-color: rgb(252,243,204);
@@ -50,7 +50,7 @@ body {
 }
 
 .socialUser .msg, .commonInterest .msg {
-	font-size: 35px;
+	font-size: 29px;
 	margin: 30px 10px;
 }
 

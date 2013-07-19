@@ -5,13 +5,12 @@
 		{{/each}}
 	
 		<div class="commonInterest">
-			<div class="msg">We think you both might like:</div>
+			<div class="msg">You both might like...</div>
 			{{#each commonInterests}}
 			<div class="interest common">
 				<span>{{this}}</span>
 			</div>
 			{{/each}}
-			<div class="msg">Discuss...</div>
 		</div>
 	
 		<div class="clear"></div>
@@ -20,8 +19,8 @@
 
 <template name="socialUser">
 	<div class="socialUser">
-		<div class="greeting">user {{userId}}</div>
-		<div class="msg">We guess you might like:</div>
+		<div class="greeting">#{{userId}}</div>
+		<div class="msg">You seem to like...</div>
 		{{#each interests}}
 		<div class="interest" data-interest='{{this}}'>
 			<span>{{this}}</span>
