@@ -6,7 +6,8 @@ var profileEndpoint = "http://www.turn.com";
 if (Meteor.isClient) {
   Meteor.Router.add({
     '/': 'welcome',
-    '/social': 'welcomeSocial'
+    '/social': 'welcomeSocial',
+    '/closeUpMode': 'closeUpMode'
   });
 
   Template.body.helpers({
@@ -15,6 +16,8 @@ if (Meteor.isClient) {
       switch (Meteor.Router.page()) {
         case 'welcomeSocial':
           return 'welcomeSocial';
+        case 'closeUpMode':
+          return 'closeUpMode';
         default:
           return 'welcome';
       }
