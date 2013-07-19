@@ -39,9 +39,12 @@ if (Meteor.isClient) {
         var logo = $(".logo");
         logo.animate({
           "width": '200px',
-          "height": '100px'
+          "height": '39px'
         }, 3000);
-        logo.css("float", "left");
+        logo.css({
+          "float": "left",
+          "overflow": "visible"
+        });
         var userInfo = $(".userId");
 
         $(".presenceDetected").remove();

@@ -6,7 +6,11 @@
 	
 		<div class="commonInterest">
 			<div class="msg">We think you both might like:</div>
-			<div class="interest common"><span>{{commonInterest}}</span></div>
+			{{#each commonInterests}}
+			<div class="interest common">
+				<span>{{interest}}</span>
+			</div>
+			{{/each}}
 			<div class="msg">Discuss...</div>
 		</div>
 	
@@ -19,11 +23,9 @@
 		<div class="greeting">user {{id}}</div>
 		<div class="msg">We guess you might like:</div>
 		{{#each interests}}
-			{{#if isCommonInterest interest}}
-		<div class="interest common"><span>{{interest}}</span></div>
-			{{else}}
-		<div class="interest"><span>{{interest}}</span></div>
-			{{/if}}
+		<div class="interest" data-interest='{{interest}}'>
+			<span>{{interest}}</span>
+		</div>
 		{{/each}}
 	</div>
 </template>
