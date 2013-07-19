@@ -1,4 +1,4 @@
-var POLLING_INTERVAL = 1000;
+var POLLING_INTERVAL = 300;
 
 var queryInterval = 10000;
 var routerEndpoint = "http://www.turn.com";
@@ -17,6 +17,7 @@ if (Meteor.isClient) {
         var addresses = Object.keys(devices);
         
         var closeAddresses = addresses.filter(function(address){
+
           return devices[address].isClose;
         });
 
