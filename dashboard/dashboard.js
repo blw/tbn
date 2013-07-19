@@ -35,7 +35,32 @@ if (Meteor.isClient) {
       $(".idcard").removeClass('none');
       $(".userInfo").animate({
         left: '-=1200'
-      }, 3000)
+      }, 3000, function() {
+        var logo = $(".logo");
+        logo.animate({
+          "width": '200px',
+          "height": '39px'
+        }, 3000);
+        logo.css({
+          "float": "left",
+          "overflow": "visible"
+        });
+        var userInfo = $(".userId");
+
+        $(".presenceDetected").remove();
+        $(".welcomeScreen").append(userInfo);
+
+        userInfo.css({
+          "float": "right",
+          "margin-right": "700px"
+        });
+        userInfo.animate({
+          "margin-right" : "+30px",
+          "margin-top" : "5px"
+        }, 3000);
+
+      // Animation complete.
+      });
     }, 2000);
   }, 2000);
  
@@ -64,12 +89,12 @@ if (Meteor.isServer) {
     //   });
     // }, queryInterval);
 
-
     Meteor.methods({
-        getUserProfileData: function () {
+        getUserProfileData: function (callback) {
             var _time = (new Date).toTimeString();
             console.log(_time);
-            return closeUpData;
+            var closeUpData = {};
+            return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac=e8:99:c4:7d:47:7d');
         }
     });
 

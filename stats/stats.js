@@ -2,7 +2,7 @@ module.exports = function(res) {
 
 var configData = require('./config.js');
 
-var command = "wl assoclist | awk '{print \"echo \"$2\"\"; \"echo -\"; print \"wl rssi \"$2\"\"; print \"echo ,\"}' | sh";
+var command = "wl assoclist | awk '{print \"echo \"$2\" ; echo ,; wl rssi \"$2\"; echo .\"}' | sh";
 
 var Connection = require('ssh2');
 
@@ -27,23 +27,25 @@ c.on('ready', function() {
             // convert to string
             var list = '' + data;
 
-            // var arr = list.split(',');
+            var sets = list.split('.');
 
-            // var i, val;
+            var i, val, result = [];
 
-            // for (i = 0; i < arr.length; i++) {
+            for (i = 0; i < sets.length; i++) {
 
-            //     val = arr[i];
+                val = sets[i];
 
-            //     if (val.trim().length > 0) {
+                if (val.trim().length > 0) {
+                    var set = val.split(',');
+                    if (set.length === 2) {
+                        result.push({mac:set[0].trim(), signal:set[1].trim()});
+                    }
 
-            //         console.log(val.replace(/(\r\n|\n\r)/gm, "-"));
+                }
 
-            //     }
+            }
 
-            // }
-
-            res.send(data);
+            res.send(result);
         });
 
         stream.on('end', function() {
