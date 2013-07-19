@@ -92,7 +92,8 @@ if (Meteor.isClient) {
   Meteor.Router.add({
     '/welcomeSingle': 'welcomeSingle',
     '/social': 'welcomeSocial',
-    '/closeUpMode': 'closeUpMode'
+    '/closeUpMode': 'closeUpMode',
+    '/farMode': 'farMode'
   });
 
   Template.body.helpers({
@@ -105,6 +106,8 @@ if (Meteor.isClient) {
           return 'closeUpMode';
         case 'welcomeSingle':
           return 'welcomeSingleMode'
+        case 'farMode':
+          return 'farMode';
         default:
           return 'welcome';
       }
@@ -150,6 +153,8 @@ if (Meteor.isServer) {
         }, 
         getDeviceData: function () {
             return Meteor.http.get('http://ozan.turn.corp:3000/stats');
+        getQPS: function() {
+          return Meteor.http.get('http://www.turn.com/sites/all/modules/turn_home_js/qps.php');
         }
     });
 
