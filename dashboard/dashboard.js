@@ -25,8 +25,6 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     //place holder how to get remote data such as the wifi router
-    var closeUpData = {};
-    var macAddresses = [];
     // Meteor.setInterval(function() {
     //   Meteor.http.get(routerEndpoint, function (error, result) {
     //     var parsedMacAddresses = [];
