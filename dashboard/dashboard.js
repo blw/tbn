@@ -4,6 +4,9 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
+  Meteor.call ("getUserProfileData", function(error, result) {
+    console.log(result.content);
+  });
   Meteor.Router.add({
     '/': 'welcome',
     '/social': 'welcomeSocial',
