@@ -29,11 +29,19 @@ if (Meteor.isClient && document.location.pathname === "/welcomeSingleMode") {
       var userId = Session.get('userId');
       var creatives = Session.get('creatives');
       var tags = Session.get('tags');
+      if (userId) {
+        sessionStorage.setItem("userId", userId);
+      }
 
-      sessionStorage.setItem("userId", userId);
-      sessionStorage.setItem("creatives", JSON.stringify(creatives));
-      sessionStorage.setItem("tags", JSON.stringify(tags));
-      return Session.get('userId');
+      if (creatives) {
+        sessionStorage.setItem("creatives", JSON.stringify(creatives));
+      }
+      
+      if (tags) {
+        sessionStorage.setItem("tags", JSON.stringify(tags));
+      }
+      
+      return sessionStorage.getItem("userId");
     };
 
     Meteor.setTimeout(function() {

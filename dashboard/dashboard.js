@@ -68,11 +68,11 @@ if (Meteor.isClient) {
   }
 
   function multiCloseModeHandler(){
-    // console.log('GOING TO MULTI CLOSE MODE!');
-    // if (document.location.pathname !== "/welcomeSocialMode" && document.location.pathname !== "/socialMode") {
-    //   console.log(document.location.pathname);
-    //   document.location = "/welcomeSocialMode";  
-    // }
+    console.log('GOING TO MULTI CLOSE MODE!');
+    if (document.location.pathname !== "/welcomeSocialMode" && document.location.pathname !== "/socialMode") {
+      console.log(document.location.pathname);
+      document.location = "/welcomeSocialMode";  
+    }
   }
 
 
