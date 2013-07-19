@@ -86,12 +86,12 @@ if (Meteor.isServer) {
     //   });
     // }, queryInterval);
 
-
     Meteor.methods({
-        getUserProfileData: function () {
+        getUserProfileData: function (callback) {
             var _time = (new Date).toTimeString();
             console.log(_time);
-            return closeUpData;
+            var closeUpData = {};
+            return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac=e8:99:c4:7d:47:7d');
         }
     });
 
