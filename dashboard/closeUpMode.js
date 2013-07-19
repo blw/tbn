@@ -1,8 +1,8 @@
 if (Meteor.isClient) {
 	Template.closeUpMode.creatives = [
-		{ id: 32160025, width: 320, height: 270, advertiser: 'Sprint' },
-		{ id: 32160026, width: 320, height: 270, advertiser: 'Sprint' }, 
-		{ id: 32160027, width: 320, height: 270, advertiser: 'Sprint' }
+		{ id: 31823835, advertiser: 'Sprint' },
+		{ id: 32371309, advertiser: 'Sprint' }, 
+		{ id: 32346120, advertiser: 'Sprint' }
 	];
 
 	Template.closeUpMode.tags = [ 'autos', 'outdoors', 'sports', 'cooking'];

@@ -8,6 +8,9 @@
 	width: 0;
 	min-height: 910px;
 	background-color: #F2E0D8;
+	background-image: url('turn_orange_concentrics_all.png');
+	background-position: bottom left;
+	background-repeat: no-repeat;
 	border-radius: 10px;
 }
 
