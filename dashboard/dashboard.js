@@ -35,7 +35,32 @@ if (Meteor.isClient) {
 
 
   function devicesChangedHandler(){
-    console.log('SOMETHING CHANGED', currentDeviceCount, currentCloseDeviceCount);
+    console.log('Far devices:', (currentDeviceCount - currentCloseDeviceCount), 'Close devices: ', currentCloseDeviceCount);
+    if(currentCloseDeviceCount === 0){
+      farModeHandler();
+    } else {
+      closeModeHandler();
+    }
+  }
+
+  function closeModeHandler(){
+    if(currentCloseDeviceCount === 1){
+      singleCloseModeHandler();
+    } else {
+      multiCloseModeHandler();
+    }
+  }
+
+  function farModeHandler(){
+    console.log('GOING TO FAR MODE!');
+  }
+
+  function singleCloseModeHandler(){
+    console.log('GOING TO SINGLE CLOSE MODE!');
+  }
+
+  function multiCloseModeHandler(){
+    console.log('GOING TO MULTI CLOSE MODE!');
   }
 
   var detectDevices = Meteor.setInterval(function() {
@@ -51,8 +76,8 @@ if (Meteor.isClient) {
         }
       }
     }
-    console.log(result);
-    console.log("macAddress is " + macAddressArray);
+    //console.log(result);
+    //console.log("macAddress is " + macAddressArray);
     if (macAddressArray.length === 1) {
       Meteor.clearInterval(detectDevices);
       Meteor.setTimeout(function() {
@@ -186,7 +211,8 @@ if (Meteor.isServer) {
             return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac='+macAddress);
         }, 
         getDeviceData: function () {
-            return Meteor.http.get('http://ozan.turn.corp:3000/stats');
+            return Meteor.http.get('http://ozan.turn.corp:3000/stats')
+        },
         getQPS: function() {
           return Meteor.http.get('http://www.turn.com/sites/all/modules/turn_home_js/qps.php');
         }
