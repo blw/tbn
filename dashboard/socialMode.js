@@ -1,12 +1,26 @@
 if (Meteor.isClient && document.location.pathname === "/socialMode") {
 	console.log("session storage user Id 1: " + sessionStorage.getItem("tags1"));
+	var tags1 = JSON.parse(sessionStorage.getItem("tags1"));
+	var tags2 = JSON.parse(sessionStorage.getItem("tags2"));
+	var tags1Index = tags1.indexOf(" Chief Household Officer");
+	var tags2Index = tags2.indexOf(" Chief Household Officer");
+	console.log("tag1index " + tags1Index);
+	console.log("tag2index " + tags2Index);
+	if (tags1Index >= 0) {
+		tags1.splice(tags1Index, 1);
+		tags1.push(" Household");
+	}
+	if (tags2Index >= 0) {
+		tags2.splice(tags2Index, 1);
+		tags2.push(" Household");
+	}
 	Template.socialMode.socialUsers = [
 		{
 			'userId':sessionStorage.getItem("userId1"),
-			'interests':JSON.parse(sessionStorage.getItem("tags1"))
+			'interests':tags1
 		},{
 			'userId':sessionStorage.getItem("userId2"),
-			'interests':JSON.parse(sessionStorage.getItem("tags2"))
+			'interests':tags2
 		}
 	];
 

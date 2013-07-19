@@ -61,10 +61,10 @@ if (Meteor.isClient) {
   }
 
   function singleCloseModeHandler(){
-    // console.log('GOING TO SINGLE CLOSE MODE!');
-    // if (document.location.pathname !== "/welcomeSingleMode" && document.location.pathname !== "/closeUpMode") {
-    //   document.location = "/welcomeSingleMode";  
-    // }
+    console.log('GOING TO SINGLE CLOSE MODE!');
+    if (document.location.pathname !== "/welcomeSingleMode" && document.location.pathname !== "/closeUpMode") {
+      document.location = "/welcomeSingleMode";  
+    }
   }
 
   function multiCloseModeHandler(){
