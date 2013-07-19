@@ -4,10 +4,6 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
-  Template.welcome.greeting = function () {
-    return "Welcome to dashboard. ";
-  };
-
   Template.welcome.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
