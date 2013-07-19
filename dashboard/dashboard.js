@@ -69,37 +69,12 @@ if (Meteor.isClient) {
 
   function multiCloseModeHandler(){
     console.log('GOING TO MULTI CLOSE MODE!');
-    if (document.location.pathname !== "/social") {
-      document.location = "/social";  
+    if (document.location.pathname !== "/welcomeSocialMode" && document.location.pathname !== "/socialMode") {
+      console.log(document.location.pathname);
+      document.location = "/welcomeSocialMode";  
     }
   }
-
-  var detectDevices = Meteor.setInterval(function() {
-    Meteor.call('getDeviceData', function(error, result) {
-    var macAddressArray = [];
-    if (result) {
-      var data = result.data;
-      for (macAddressVal in data) {
-        if (data.hasOwnProperty(macAddressVal)) {
-           if (data[macAddressVal].isClose) {
-            macAddressArray.push(data[macAddressVal]);
-          }
-        }
-      }
-    }
-    //console.log(result);
-    //console.log("macAddress is " + macAddressArray);
-    if (macAddressArray.length === 1) {
-      Meteor.clearInterval(detectDevices);
-    } else if (macAddressArray.length > 1) {
-      Meteor.clearInterval(detectDevices);
-      Meteor.Router.to("/social");
-    }
-    
-    });
-  }, 1000);
   
-
   Meteor.call('getUserProfileData', function(error, data) {
     console.log(data);
         if (data) {
@@ -127,7 +102,8 @@ if (Meteor.isClient) {
   });
   Meteor.Router.add({
     '/welcomeSingleMode': 'welcomeSingleMode',
-    '/social': 'welcomeSocial',
+    '/welcomeSocialMode': 'welcomeSocialMode',
+    '/socialMode' : 'socialMode',
     '/closeUpMode': 'closeUpMode',
     '/farMode': 'farMode'
   });
@@ -136,8 +112,10 @@ if (Meteor.isClient) {
     layoutName: function() {
       console.log("meteor router page :" + Meteor.Router.page());
       switch (Meteor.Router.page()) {
-        case 'welcomeSocial':
-          return 'welcomeSocial';
+        case 'welcomeSocialMode':
+          return 'welcomeSocialMode';
+        case 'socialMode': 
+          return 'socialMode';
         case 'closeUpMode':
           return 'closeUpMode';
         case 'welcomeSingleMode':
