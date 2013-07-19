@@ -19,7 +19,7 @@
 		<div class="greeting">user {{id}}</div>
 		<div class="msg">We guess you might like:</div>
 		{{#each interests}}
-			{{#if isCommonInterestIs interest}}
+			{{#if isCommonInterest interest}}
 		<div class="interest common"><span>{{interest}}</span></div>
 			{{else}}
 		<div class="interest"><span>{{interest}}</span></div>

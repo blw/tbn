@@ -8,5 +8,10 @@ if (Meteor.isClient) {
 			'interests':[{interest:'Biking'},{interest:'Sailing'},{interest:'Sports'},{interest:'Golf'}]
 		}
 	];
+
 	Template.socialMode.commonInterest = 'Sports';
+
+	Template.socialUser.isCommonInterest = function(interest) {
+		return Template.socialMode.commonInterest === interest;
+	};
 }
