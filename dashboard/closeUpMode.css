@@ -20,8 +20,8 @@
 	border: #D65B24;
 	margin: 20px;
 	margin-right: 0px;
-	width: 0;
 	min-height: 910px;
+	width: 60%;
 	background-color: #F2E0D8;
 	background-image: url('turn_orange_concentrics_all.png');
 	background-position: bottom left;
@@ -32,7 +32,6 @@
 .creative {
 	float: left;
 	margin-right: 10px;
-	display: none;
 }
 
 .tags {
@@ -42,7 +41,7 @@
 	padding: 30px;
 	border: #B1D4E3;
 	margin: 20px;
-	width: 0;
+	width:28%;
 	min-height: 910px;
 	background-color: #EBF4F7;
 	background-image: url('turn_blue_concentrics_btm.png');
@@ -52,18 +51,26 @@
 }
 
 .tag {
-	display: none;
 	background-image: url('tag_orange.png');
 	background-repeat: no-repeat;
-	width: 343px;
+	width: 314px;
 	height: 109px;
 	color: white;
 	text-transform: uppercase;
 	font-weight: bold;
-	line-height: 105px;
+	line-height: 25px;
 	font-size: 20px;
-	padding-left: 10px;
+	padding-left: 28px;
 	margin-top: 20px;
+	line-height:109px;
+}
+
+.tag-inner{
+	line-height:25px;
+	text-align:center;
+	width:260px;
+	display:inline-block;
+	vertical-align: middle;	
 }
 
 .advertiser {
@@ -80,7 +87,6 @@
 	right: 15px;
 	bottom: 15px;
 	text-transform: uppercase;
-	display: none;
 	font-size: 40px;
 }
 
