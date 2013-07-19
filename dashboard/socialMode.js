@@ -1,10 +1,11 @@
-if (Meteor.isClient) {
+if (Meteor.isClient && document.location.pathname === "/socialMode") {
+	console.log("session storage user Id 1: " + sessionStorage.getItem("userId1"));
 	Template.socialMode.socialUsers = [
 		{
-			'userId':32432423,
+			'userId':sessionStorage.getItem("userId1"),
 			'interests':['Autos','Outdoors','Sports','Cooking']
 		},{
-			'userId':24209802,
+			'userId':sessionStorage.getItem("userId2"),
 			'interests':['Biking','Sailing','Sports','Golf']
 		}
 	];

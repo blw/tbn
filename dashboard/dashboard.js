@@ -74,7 +74,7 @@ if (Meteor.isClient) {
       document.location = "/welcomeSocialMode";  
     }
   }
-  
+
   Meteor.call('getUserProfileData', function(error, data) {
     console.log(data);
         if (data) {
@@ -129,11 +129,10 @@ if (Meteor.isClient) {
   });
 
 
-  Template.welcome.userId = function() {
+  Template.welcomeSingleMode.userId = function() {
     return Session.get('userId');
   };
-  Template.welcomeSocial.userId1 = "12345";
-  Template.welcomeSocial.userId2 = "12345";
+
   
  
   // Template.welcome.events({
