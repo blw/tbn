@@ -4,6 +4,24 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
+  Meteor.Router.add({
+    '/': 'welcome',
+    '/social': 'welcomeSocial'
+  });
+
+  Template.body.helpers({
+    layoutName: function() {
+      console.log("meteor router page :" + Meteor.Router.page());
+      switch (Meteor.Router.page()) {
+        case 'welcomeSocial':
+          return 'welcomeSocial';
+        default:
+          return 'welcome';
+      }
+    }
+  });
+
+
   Template.welcome.userId = "12333333";
   Template.welcomeSocial.userId1 = "12345";
   Template.welcomeSocial.userId2 = "12345";
