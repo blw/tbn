@@ -1,29 +1,4 @@
 if (Meteor.isClient) {
-	Meteor.call('getUserProfileData', function(error, data) {
-		console.log(data);
-        if (data) {
-        userId = data.data.turnUserId;
-        Session.set('userId', userId);
-        var adIds = data.data.adIds;
-        var advertisers = data.data.advertisers;
-        var creatives = [];
-        var i;
-        for (i = 0; i < adIds.length; i++) {
-          creatives.push({
-            id: adIds[i],
-            advertiser: advertisers[i]
-          });
-        }
-        Session.set('creatives', creatives);
-        var tags = [];
-        var categories = data.data.categories;
-        for (i = 0; i < categories.length; i++) {
-          var start = categories[i].lastIndexOf('>');
-          tags.push(categories[i].slice(start + 1));
-        }
-        Session.set('tags', tags);
-      }
-});
 
 	Template.closeUpMode.userId = function() {
 		return Session.get('userId');

@@ -4,11 +4,93 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
-  Meteor.call ("getUserProfileData", function(error, result) {
-    console.log(result.content);
+  var detectDevices = Meteor.setInterval(function() {
+    Meteor.call('getDeviceData', function(error, result) {
+    var macAddressArray = [];
+    if (result) {
+      var data = result.data;
+      for (macAddressVal in data) {
+        if (data.hasOwnProperty(macAddressVal)) {
+           if (data[macAddressVal].isClose) {
+            macAddressArray.push(data[macAddressVal]);
+          }
+        }
+      }
+    }
+    console.log(result);
+    console.log("macAddress is " + macAddressArray);
+    if (macAddressArray.length === 1) {
+      Meteor.clearInterval(detectDevices);
+      Meteor.setTimeout(function() {
+      $(".signal").removeClass('none');
+      Meteor.setTimeout(function() {
+        $(".idcard").removeClass('none');
+        $(".userInfo").animate({
+          left: '-=1200'
+        }, 3000, function() {
+          var logo = $(".logo");
+          logo.animate({
+            "width": '200px',
+            "height": '39px'
+          }, 3000);
+          logo.css({
+            "float": "left",
+            "overflow": "visible"
+          });
+          var userInfo = $(".userId");
+
+          $(".presenceDetected").remove();
+          $(".welcomeScreen").append(userInfo);
+
+          userInfo.css({
+            "float": "right",
+            "margin-right": "700px"
+          });
+          userInfo.animate({
+            "margin-right" : "+30px",
+            "margin-top" : "5px"
+          }, 3000);
+
+        // Animation complete.
+          });
+        }, 2000);
+      }, 2000);
+    } else if (macAddressArray.length > 1) {
+      Meteor.clearInterval(detectDevices);
+      Meteor.Router.to("/social");
+    }
+    
+    });
+  }, 1000);
+  
+
+  Meteor.call('getUserProfileData', function(error, data) {
+    console.log(data);
+        if (data) {
+        userId = data.data.turnUserId;
+        Session.set('userId', userId);
+        var adIds = data.data.adIds;
+        var advertisers = data.data.advertisers;
+        var creatives = [];
+        var i;
+        for (i = 0; i < adIds.length; i++) {
+          creatives.push({
+            id: adIds[i],
+            advertiser: advertisers[i]
+          });
+        }
+        Session.set('creatives', creatives);
+        var tags = [];
+        var categories = data.data.categories;
+        for (i = 0; i < categories.length; i++) {
+          var start = categories[i].lastIndexOf('>');
+          tags.push(categories[i].slice(start + 1));
+        }
+        Session.set('tags', tags);
+      }
   });
   Meteor.Router.add({
-    '/': 'welcome',
+    '/welcomeSingle': 'welcomeSingle',
     '/social': 'welcomeSocial',
     '/closeUpMode': 'closeUpMode'
   });
@@ -21,6 +103,8 @@ if (Meteor.isClient) {
           return 'welcomeSocial';
         case 'closeUpMode':
           return 'closeUpMode';
+        case 'welcomeSingle':
+          return 'welcomeSingleMode'
         default:
           return 'welcome';
       }
@@ -28,44 +112,12 @@ if (Meteor.isClient) {
   });
 
 
-  Template.welcome.userId = "12333333";
+  Template.welcome.userId = function() {
+    return Session.get('userId');
+  };
   Template.welcomeSocial.userId1 = "12345";
   Template.welcomeSocial.userId2 = "12345";
-
-  Meteor.setTimeout(function() {
-    $(".signal").removeClass('none');
-    Meteor.setTimeout(function() {
-      $(".idcard").removeClass('none');
-      $(".userInfo").animate({
-        left: '-=1200'
-      }, 3000, function() {
-        var logo = $(".logo");
-        logo.animate({
-          "width": '200px',
-          "height": '39px'
-        }, 3000);
-        logo.css({
-          "float": "left",
-          "overflow": "visible"
-        });
-        var userInfo = $(".userId");
-
-        $(".presenceDetected").remove();
-        $(".welcomeScreen").append(userInfo);
-
-        userInfo.css({
-          "float": "right",
-          "margin-right": "700px"
-        });
-        userInfo.animate({
-          "margin-right" : "+30px",
-          "margin-top" : "5px"
-        }, 3000);
-
-      // Animation complete.
-      });
-    }, 2000);
-  }, 2000);
+  
  
   // Template.welcome.events({
   //   'click input' : function () {
@@ -93,13 +145,15 @@ if (Meteor.isServer) {
     // }, queryInterval);
 
     Meteor.methods({
-        getUserProfileData: function (callback) {
-            var _time = (new Date).toTimeString();
-            console.log(_time);
-            var closeUpData = {};
-            return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac=e8:99:c4:7d:47:7d');
+        getUserProfileData: function (macAddress) {
+            return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac='+macAddress);
+        }, 
+        getDeviceData: function () {
+            return Meteor.http.get('http://ozan.turn.corp:3000/stats');
         }
     });
+
+
 
     // code to run on server at startup
   });
