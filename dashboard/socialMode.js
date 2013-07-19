@@ -1,11 +1,11 @@
 if (Meteor.isClient) {
 	Template.socialMode.socialUsers = [
 		{
-			'id':32432423,
-			'interests':[{interest:'Autos'},{interest:'Outdoors'},{interest:'Sports'},{interest:'Cooking'}]
+			'userId':32432423,
+			'interests':['Autos','Outdoors','Sports','Cooking']
 		},{
-			'id':24209802,
-			'interests':[{interest:'Biking'},{interest:'Sailing'},{interest:'Sports'},{interest:'Golf'}]
+			'userId':24209802,
+			'interests':['Biking','Sailing','Sports','Golf']
 		}
 	];
 
@@ -18,12 +18,12 @@ if (Meteor.isClient) {
 		var i,j,lenI,lenJ;
 		for(i = 0, lenI = Template.socialMode.socialUsers.length; i < lenI; i++) {
 			for(j = 0, lenJ = Template.socialMode.socialUsers[i].interests.length; j < lenJ; j++) {
-				if(interests[Template.socialMode.socialUsers[i].interests[j].interest] === true) {
-					commonInterests.push({
-						interest: Template.socialMode.socialUsers[i].interests[j].interest
-					});
+				if(interests[Template.socialMode.socialUsers[i].interests[j]] === true) {
+					commonInterests.push(
+						Template.socialMode.socialUsers[i].interests[j]
+					);
 				} else {
-					interests[Template.socialMode.socialUsers[i].interests[j].interest] = true;
+					interests[Template.socialMode.socialUsers[i].interests[j]] = true;
 				}
 			}
 		}
@@ -31,10 +31,10 @@ if (Meteor.isClient) {
 	}());
 
 	// After the common interests are found, go back and add 'common' to like-items of the users
-	setTimeout(function() {
+	Meteor.setTimeout(function() {
 		var i,len;
 		for(i = 0, len = Template.socialMode.commonInterests.length; i < len; i++) {
-			$('.interest[data-interest="'+Template.socialMode.commonInterests[i].interest+'"]').addClass('common');
+			$('.interest[data-interest="'+Template.socialMode.commonInterests[i]+'"]').addClass('common');
 		}
 	}, 1000);
 }

@@ -8,7 +8,7 @@
 			<div class="msg">We think you both might like:</div>
 			{{#each commonInterests}}
 			<div class="interest common">
-				<span>{{interest}}</span>
+				<span>{{this}}</span>
 			</div>
 			{{/each}}
 			<div class="msg">Discuss...</div>
@@ -20,11 +20,11 @@
 
 <template name="socialUser">
 	<div class="socialUser">
-		<div class="greeting">user {{id}}</div>
+		<div class="greeting">user {{userId}}</div>
 		<div class="msg">We guess you might like:</div>
 		{{#each interests}}
-		<div class="interest" data-interest='{{interest}}'>
-			<span>{{interest}}</span>
+		<div class="interest" data-interest='{{this}}'>
+			<span>{{this}}</span>
 		</div>
 		{{/each}}
 	</div>
