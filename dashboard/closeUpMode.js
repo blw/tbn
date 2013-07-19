@@ -13,6 +13,7 @@ if (Meteor.isClient) {
 	};
 
 	Meteor.setTimeout(function() {
+		console.log("inside creative wrapper close up");
 		$('.creativesWrapper').animate({
 			width: '60%'
 		}, 2000, function() {

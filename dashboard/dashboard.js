@@ -54,14 +54,24 @@ if (Meteor.isClient) {
 
   function farModeHandler(){
     console.log('GOING TO FAR MODE!');
+    if (document.location.pathname !== "/farMode") {
+      document.location = "/farMode";  
+    }
+    
   }
 
   function singleCloseModeHandler(){
     console.log('GOING TO SINGLE CLOSE MODE!');
+    if (document.location.pathname !== "/welcomeSingleMode" && document.location.pathname !== "/closeUpMode") {
+      document.location = "/welcomeSingleMode";  
+    }
   }
 
   function multiCloseModeHandler(){
     console.log('GOING TO MULTI CLOSE MODE!');
+    if (document.location.pathname !== "/social") {
+      document.location = "/social";  
+    }
   }
 
   var detectDevices = Meteor.setInterval(function() {
@@ -81,40 +91,6 @@ if (Meteor.isClient) {
     //console.log("macAddress is " + macAddressArray);
     if (macAddressArray.length === 1) {
       Meteor.clearInterval(detectDevices);
-      Meteor.setTimeout(function() {
-      $(".signal").removeClass('none');
-      Meteor.setTimeout(function() {
-        $(".idcard").removeClass('none');
-        $(".userInfo").animate({
-          left: '-=1200'
-        }, 3000, function() {
-          var logo = $(".logo");
-          logo.animate({
-            "width": '200px',
-            "height": '39px'
-          }, 3000);
-          logo.css({
-            "float": "left",
-            "overflow": "visible"
-          });
-          var userInfo = $(".userId");
-
-          $(".presenceDetected").remove();
-          $(".welcomeScreen").append(userInfo);
-
-          userInfo.css({
-            "float": "right",
-            "margin-right": "700px"
-          });
-          userInfo.animate({
-            "margin-right" : "+30px",
-            "margin-top" : "5px"
-          }, 3000);
-
-        // Animation complete.
-          });
-        }, 2000);
-      }, 2000);
     } else if (macAddressArray.length > 1) {
       Meteor.clearInterval(detectDevices);
       Meteor.Router.to("/social");
@@ -150,7 +126,7 @@ if (Meteor.isClient) {
       }
   });
   Meteor.Router.add({
-    '/welcomeSingle': 'welcomeSingle',
+    '/welcomeSingleMode': 'welcomeSingleMode',
     '/social': 'welcomeSocial',
     '/closeUpMode': 'closeUpMode',
     '/farMode': 'farMode'
@@ -164,7 +140,7 @@ if (Meteor.isClient) {
           return 'welcomeSocial';
         case 'closeUpMode':
           return 'closeUpMode';
-        case 'welcomeSingle':
+        case 'welcomeSingleMode':
           return 'welcomeSingleMode'
         case 'farMode':
           return 'farMode';
@@ -212,7 +188,7 @@ if (Meteor.isServer) {
             return Meteor.http.get('http://app002.sjc2.turn.com:8000/r/mobileuser?mac='+macAddress);
         }, 
         getDeviceData: function () {
-            return Meteor.http.get('http://ozan.turn.corp:3000/stats')
+            return Meteor.http.get('http://ozan.turn.corp:3000/stats');
         },
         getQPS: function() {
           return Meteor.http.get('http://www.turn.com/sites/all/modules/turn_home_js/qps.php');
