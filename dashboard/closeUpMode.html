@@ -7,27 +7,27 @@
 	</div>
 	<div class="clear"></div>
 	<div class="creativesWrapper">
+		<div class="boxLabel">Here are some ads you may remember...</div>
 		<div class="creatives">
 			{{#each creatives}}
 				{{> creative}}
 			{{/each}}
 		</div>
-		<div class="boxLabel">Recent Media</div>
 	</div>
 
 	<div class="tags">
+		<div class="boxLabel">We think these apply to you...</div>
 		{{#each tags}}
 			<div class="tag">
 				<div class="tag-inner">{{this}}</div>
 			</div>
 		{{/each}}
-		<div class="boxLabel">Your Interests</div>
 	</div>
 </template>
 
 <template name="creative">
 	<div id="{{id}}" class="creative">
-		<iframe style="width:325px; height:270px" frameBorder="0" src="https://console.turn.com/server/demo/layouts/db/ads.htm?dbl_ads={{id}}"></iframe>
 		<div class="advertiser">{{advertiser}}</div>
+		<iframe style="width:325px; height:270px" frameBorder="0" src="https://console.turn.com/server/demo/layouts/db/ads.htm?dbl_ads={{id}}"></iframe>
 	</div>
 </template>

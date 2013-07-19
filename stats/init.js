@@ -1,6 +1,6 @@
 var SAMPLES = 8;
 var SAMPLE_RATE = 300;
-
+var MIN_RANGE = 10;
 var TREND_MAGNITUDE = 10;
 
 var connectionConfig = require('./config.js');
@@ -22,9 +22,20 @@ app.get('/stats', function(req, res){
 app.get('/cheat', function(req, res){
 	if(req.query.mac in tracked){
 		var device = tracked[req.query.mac];
+
 		if('set' in req.query){
-			if('val' in req.query) device.cheat[req.query.set] = req.query.val;
-			else delete device.cheat[req.query.set];
+			switch(req.query.set){
+				case 'isClose':
+					if('val' in req.query) device.cheat.isClose = req.query.val;
+					else delete device.cheat.isClose;
+					break;
+				case 'max':
+					device.max = parseInt(req.query.max, 10);
+					break;
+				case 'min':
+					device.min = parseInt(req.query.min, 10);
+					break;
+			}
 		} else if ('reset' in req.query){
 			tracked[req.query.mac] = { cheat: {}, close: false, mac: req.query.mac, signals: [], min: 9999, max: -9999 };
 		}
@@ -85,7 +96,7 @@ connection.on('ready', function(){
 
 			var devices = data.split('\n').filter(notEmpty).map(function(item){
 				var address = item.split(' ')[1];
-				if(!(address in tracked)) tracked[address] = { cheat: {}, close: false, mac: address, signals: [], min: 9999, max: -9999 };
+				if(!(address in tracked)) tracked[address] = { cheat: {}, isClose: false, mac: address, signals: [], min: 9999, max: -9999 };
 				tracked[address].touched = true;
 
 				return tracked[address];
@@ -104,16 +115,19 @@ connection.on('ready', function(){
 					var signalValue = data.trim().replace('\n', '');
 					signalValue = parseInt(signalValue, 10);
 
-					if(device.min > signalValue){
-						device.min = signalValue;
-					}
-
-					if(device.max < signalValue){
-						device.max = signalValue;
-					}
 
 					device.signals.unshift(signalValue);
-					if(device.signals.length > SAMPLES)	device.signals.pop();
+					if(device.signals.length > SAMPLES){
+						if(device.min > signalValue){
+							device.min = signalValue;
+						}
+
+						if(device.max < signalValue){
+							device.max = signalValue;
+						}
+						
+						device.signals.pop();
+					}
 
 					var total = device.signals.reduce(function(prev, curr){
 						return prev + curr;
@@ -127,20 +141,22 @@ connection.on('ready', function(){
 					}
 
 					device.range = device.max - device.min;
-					if(Math.abs(device.average) < Math.abs(device.min + (device.range / 2))){
-						device.isClose = true;
-					} else {
-						device.isClose = false;
+					if(device.range > MIN_RANGE){
+						if(Math.abs(device.average) < Math.abs(device.min + (device.range / 2))){
+							device.isClose = true;
+						} else {
+							device.isClose = false;
+						}
 					}
 
-					/*
-					if(device.signals.length === 8){
-						device.trend = (device.signals[0] + device.signals[1]) - (device.signals[6] + device.signals[7]);
+					
+					//if(device.signals.length === 8){
+					//	device.trend = (device.signals[0] + device.signals[1]) - (device.signals[6] + device.signals[7]);
 							
-						if(Math.abs(device.trend) > TREND_MAGNITUDE){
+					//	if(Math.abs(device.trend) > TREND_MAGNITUDE){
 					//		device.isClose = (device.trend > 0);
-						}
-					}*/
+					//	}
+					//}
 				});
 			});
 		});
