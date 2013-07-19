@@ -7,8 +7,8 @@
 		<div class="commonInterest">
 			<div class="msg">You both might like...</div>
 			{{#each commonInterests}}
-			<div class="interest common">
-				<span>{{this}}</span>
+			<div class="tag interest common">
+				<div class="tag-inner">{{this}}</div>
 			</div>
 			{{/each}}
 		</div>
@@ -22,8 +22,8 @@
 		<div class="greeting">#{{userId}}</div>
 		<div class="msg">You seem to like...</div>
 		{{#each interests}}
-		<div class="interest" data-interest='{{this}}'>
-			<span>{{this}}</span>
+		<div class="tag interest" data-interest='{{this}}'>
+			<div class="tag-inner">{{this}}</div>
 		</div>
 		{{/each}}
 	</div>

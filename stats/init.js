@@ -22,8 +22,12 @@ app.get('/stats', function(req, res){
 app.get('/cheat', function(req, res){
 	if(req.query.mac in tracked){
 		var device = tracked[req.query.mac];
-		if('val' in req.query) device.cheat[req.query.set] = req.query.val;
-		else delete device.cheat[req.query.set];
+		if('set' in req.query){
+			if('val' in req.query) device.cheat[req.query.set] = req.query.val;
+			else delete device.cheat[req.query.set];
+		} else if ('reset' in req.query){
+			tracked[req.query.mac] = { cheat: {}, close: false, mac: req.query.mac, signals: [], min: 9999, max: -9999 };
+		}
 	}
 
 	res.send(getStats());
