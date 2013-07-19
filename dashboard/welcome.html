@@ -1,5 +1,27 @@
 <template name="welcome">
+<div class="welcomeScreen">
 	<div class="logo">
   		<img src="turn_pg1.png"></img>
 	</div>
+	<div class="presenceDetected">
+		<div class="signal none">
+			<img src="turn_bigtarget.png"></img>
+		</div>
+		<div class="idcard none">
+			<img src="turn_large_cutrect.png"></img>
+			<div class="userInfo">
+				<div class="welcomeGreeting">
+					Welcome
+				</div>
+				<div class="userId">
+					user {{userId}}
+				</div>
+				<div class="findAboutYouMessage">
+					Let's find out what we know about you...
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
 </template>

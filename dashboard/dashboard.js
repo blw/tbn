@@ -4,24 +4,32 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
-  Template.welcome.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    
-      Meteor.call("getUserProfileData", function (error, result) {
-        console.log(result);
-        Session.set("time", result);
-      });
-    }
-  });
+  Template.welcome.userId = "12333333";
+  Template.welcomeSocial.userId1 = "12345";
+  Template.welcomeSocial.userId2 = "12345";
 
-document.onreadystatechange = function () {
-    if (document.readyState == "complete") {
-        document.body.appendChild(Meteor.render(Template.test));
-    }
-}
+  Meteor.setTimeout(function() {
+    $(".signal").removeClass('none');
+    Meteor.setTimeout(function() {
+      $(".idcard").removeClass('none');
+      $(".userInfo").animate({
+        left: '-=1200'
+      }, 3000)
+    }, 2000);
+  }, 2000);
+ 
+  // Template.welcome.events({
+  //   'click input' : function () {
+  //     // template data, if any, is available in 'this'
+  //     if (typeof console !== 'undefined')
+  //       console.log("You pressed the button");
+    
+  //     Meteor.call("getUserProfileData", function (error, result) {
+  //       console.log(result);
+  //       Session.set("time", result);
+  //     });
+  //   }
+  // });
   
 }
 
