@@ -11,6 +11,7 @@ if (Meteor.isClient) {
 
 	Template.socialMode.commonInterests = [];
 
+	// Go through both users' lists and find ones that are the same
 	(function() {
 		var interests = {};
 		var commonInterests = [];
@@ -29,6 +30,7 @@ if (Meteor.isClient) {
 		Template.socialMode.commonInterests = commonInterests;
 	}());
 
+	// After the common interests are found, go back and add 'common' to like-items of the users
 	setTimeout(function() {
 		var i,len;
 		for(i = 0, len = Template.socialMode.commonInterests.length; i < len; i++) {
