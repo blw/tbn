@@ -9,9 +9,30 @@ if (Meteor.isClient) {
 		}
 	];
 
-	Template.socialMode.commonInterest = 'Sports';
+	Template.socialMode.commonInterests = [];
 
-	Template.socialUser.isCommonInterest = function(interest) {
-		return Template.socialMode.commonInterest === interest;
-	};
+	(function() {
+		var interests = {};
+		var commonInterests = [];
+		var i,j,lenI,lenJ;
+		for(i = 0, lenI = Template.socialMode.socialUsers.length; i < lenI; i++) {
+			for(j = 0, lenJ = Template.socialMode.socialUsers[i].interests.length; j < lenJ; j++) {
+				if(interests[Template.socialMode.socialUsers[i].interests[j].interest] === true) {
+					commonInterests.push({
+						interest: Template.socialMode.socialUsers[i].interests[j].interest
+					});
+				} else {
+					interests[Template.socialMode.socialUsers[i].interests[j].interest] = true;
+				}
+			}
+		}
+		Template.socialMode.commonInterests = commonInterests;
+	}());
+
+	setTimeout(function() {
+		var i,len;
+		for(i = 0, len = Template.socialMode.commonInterests.length; i < len; i++) {
+			$('.interest[data-interest="'+Template.socialMode.commonInterests[i].interest+'"]').addClass('common');
+		}
+	}, 1000);
 }
