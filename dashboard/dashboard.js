@@ -35,7 +35,29 @@ if (Meteor.isClient) {
       $(".idcard").removeClass('none');
       $(".userInfo").animate({
         left: '-=1200'
-      }, 3000)
+      }, 3000, function() {
+        var logo = $(".logo");
+        logo.animate({
+          "width": '200px',
+          "height": '100px'
+        }, 3000);
+        logo.css("float", "left");
+        var userInfo = $(".userId");
+
+        $(".presenceDetected").remove();
+        $(".welcomeScreen").append(userInfo);
+
+        userInfo.css({
+          "float": "right",
+          "margin-right": "700px"
+        });
+        userInfo.animate({
+          "margin-right" : "+30px",
+          "margin-top" : "5px"
+        }, 3000);
+
+      // Animation complete.
+      });
     }, 2000);
   }, 2000);
  
