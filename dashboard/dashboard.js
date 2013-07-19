@@ -1,9 +1,43 @@
+var POLLING_INTERVAL = 1000;
+
 var queryInterval = 10000;
 var routerEndpoint = "http://www.turn.com";
 var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
+  var devices = {};
+  var currentDeviceCount = 0;
+  var currentCloseDeviceCount = 0;
+
+  var devicePoller = Meteor.setInterval(function() {
+    Meteor.call('getDeviceData', function(error, result) {
+      if (result){
+        devices = result.data;
+        var addresses = Object.keys(devices);
+        
+        var closeAddresses = addresses.filter(function(address){
+          return devices[address].isClose;
+        });
+
+        var prevDeviceCount = currentDeviceCount;
+        var prevCloseDeviceCount = currentCloseDeviceCount;
+        
+        currentDeviceCount = addresses.length;
+        currentCloseDeviceCount = closeAddresses.length;
+
+        if(addresses.length !== prevDeviceCount || closeAddresses.length !== prevCloseDeviceCount){
+          devicesChangedHandler();
+        }
+      }
+    });
+  }, POLLING_INTERVAL);
+
+
+  function devicesChangedHandler(){
+    console.log('SOMETHING CHANGED', currentDeviceCount, currentCloseDeviceCount);
+  }
+
   var detectDevices = Meteor.setInterval(function() {
     Meteor.call('getDeviceData', function(error, result) {
     var macAddressArray = [];
