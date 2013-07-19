@@ -4,11 +4,11 @@ var profileEndpoint = "http://www.turn.com";
 
 
 if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to dashboard.";
+  Template.welcome.greeting = function () {
+    return "Welcome to dashboard. ";
   };
 
-  Template.hello.events({
+  Template.welcome.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
       if (typeof console !== 'undefined')
@@ -20,6 +20,13 @@ if (Meteor.isClient) {
       });
     }
   });
+
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        document.body.appendChild(Meteor.render(Template.test));
+    }
+}
+  
 }
 
 if (Meteor.isServer) {
